@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm
 from .views import generic
 from django.urls import reverse_lazy
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
