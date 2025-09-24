@@ -6,8 +6,8 @@ from rest_framework.routers import DefaultRouter
 
 urlpatterns = [
     path('register/', RegisterView.as_view(), name='register'),
-    path('login/', LoginView.as_view(template_name="acccounts/login.html"), name='login'),
-    path('logout/', LogoutView.as_view(), name='logout'),
+    path('login/', LoginView.as_view(template_name="accounts/login.html"), name='login'),
+    path('logout/', LogoutView.as_view(next_page='/'), name='logout'),
     path('', home.as_view(), name='home'),
 ]
 router = DefaultRouter()

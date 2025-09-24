@@ -1,13 +1,13 @@
-from django.shortcuts import render
+
 from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm
 from django.views import generic
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from .models import Staff_user, Student_user, Admin_user
-from rest_framework import viewsets
+from rest_framework import viewsets, permissions
 from .serializer import UserSerializer, StaffUserSerializer, StudentUserSerializer, AdminUserSerializer
-
+from rest_framework.decorators import action
 # Create your views here.
 
 

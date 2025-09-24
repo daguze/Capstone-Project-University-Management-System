@@ -1,14 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>login please</title>
-</head>
-<body>
-    <h2>login please</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Login</button>
-    </form>
-</body>
-</html>
+{% extends "accounts/base.html" %}
+
+{% block title %}Logged Out{% endblock %}
+
+{% block content %}
+<div class="text-center mt-5">
+    <h2>You have been logged out</h2>
+    <p><a href="{% url 'home' %}" class="btn btn-primary mt-3">Go to Home</a></p>
+</div>
+{% endblock %}
