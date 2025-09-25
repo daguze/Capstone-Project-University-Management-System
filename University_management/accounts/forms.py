@@ -15,3 +15,9 @@ class RegisterForm(forms.ModelForm):
         model = User
         fields = ('email', 'First_name', 'Last_name', 'password1', 'password2')
 
+    def password_checking(self):
+            p1 = self.cleaned_data.get("password1")
+            p2 = self.cleaned_data.get("password2")
+            if p1 and p2 and p1 != p2:
+                raise forms.ValidationError("Passwords does not match, Please try again")
+            return p2
