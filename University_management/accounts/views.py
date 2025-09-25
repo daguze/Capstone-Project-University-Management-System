@@ -11,9 +11,9 @@ def home(request):
 
 def login_user(request):
     if request.method == 'POST':
-        email = request.POST.get('email')
+        username = request.POST.get('username')
         password = request.POST.get('password')
-        user_check = authenticate(request, email=email, password=password)
+        user_check = authenticate(request, username=username, password=password)
         if user_check is not None:
             login(request, user_check)
             messages.success(request, "You have successfully logged in.")
@@ -21,8 +21,7 @@ def login_user(request):
         else:
             messages.error(request, "Invalid username or password.")
             return redirect('login')
-    else:
-        return render(request, 'accounts/login.html')
+    return render(request, 'accounts/login.html')
 
 
 def logout_user(request):
