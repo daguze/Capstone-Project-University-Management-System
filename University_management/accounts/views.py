@@ -5,7 +5,7 @@ from .serializers import StaffUserSerializer, StudentUserSerializer
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from .forms import RegisterForm
+
 def home(request):
     return render(request, 'accounts/home.html')
 
@@ -30,15 +30,3 @@ def logout_user(request):
     return redirect('home')
   
 
-def register_user(request):
-    if request.method == 'POST':
-        form = RegisterForm(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request, "Registration successful. You can now log in.")
-            return redirect('login')
-        else:
-            messages.error(request, "Unsuccessful registration. Invalid information.")
-            return render(request, 'accounts/register.html', {'form': form})
-    else:
-        return render(request, 'accounts/register.html', {'form': RegisterForm()})
