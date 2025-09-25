@@ -1,6 +1,6 @@
 
 from django.db import models
-from django.contrib.auth.models import AbstractUser, Permission, Group
+from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 class User(AbstractUser):
@@ -9,7 +9,7 @@ class User(AbstractUser):
     
 
     def __str__(self):
-        return self.Username
+        return self.Full_name
     
 
 class Staff_user(models.Model):
