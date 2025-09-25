@@ -1,43 +1,27 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
+class user(AbstractUser):
+    Full_name = models.CharField(max_length=100)
+    Entry_date = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return self.username
+    
 
 class Staff_user(models.Model):
-    first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)
-    email = models.EmailField(null=True)
-    password = models.CharField(max_length=100)
-    date_joined = models.DateField(auto_now_add=True)
+    user = models.OneToOneField(user, on_delete=models.CASCADE)
+    department = models.CharField(max_length=100)
 
-    
     def __str__(self):
-        return f"{self.first_name} {self.last_name}, {self.email}"
-    
+        return f"{self.user.Full_name} is in {self.department}"
 
 
 class Student_user(models.Model):
-    first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)
-    email = models.EmailField(null=True)
-    password = models.CharField(max_length=100)
+    user = models.OneToOneField(user, on_delete=models.CASCADE)
+    department = models.CharField(max_length=100)
     date_joined = models.DateField(auto_now_add=True)
-    department = models.CharField(max_length=100, null=True)
 
-    
     def __str__(self):
-        return f"{self.first_name} {self.last_name}, {self.email} in {self.department}"
-    
-
-
-class Admin_user(models.Model):
-    first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)
-    email = models.EmailField(null=True)
-    password = models.CharField(max_length=100)
-
-    
-    def __str__(self):
-        return f"{self.first_name} {self.last_name}, {self.email}"
-    
-
-
+        return f"{self.user.Full_name} is a student in {self.department}"
