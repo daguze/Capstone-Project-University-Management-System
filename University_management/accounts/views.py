@@ -11,9 +11,9 @@ def home(request):
 
 def login_user(request):
     if request.method == 'POST':
-        username = request.POST.get('username')
+        email = request.POST.get('email')
         password = request.POST.get('password')
-        user_check = authenticate(request, username=username, password=password)
+        user_check = authenticate(request, email=email, password=password)
         if user_check is not None:
             login(request, user_check)
             messages.success(request, "You have successfully logged in.")
@@ -29,3 +29,6 @@ def logout_user(request):
     messages.success(request, "You have been logged out.")
     return redirect('home')
   
+
+def register_user(request):
+    if request.method == 'POST':
