@@ -2,11 +2,9 @@
 {% block content %}
 
 <h2>login</h2>
-    <form method="post" >
-        {% csrf_token %}
-        {{ form.as_p }}
-    </form>
-<form>
+    
+<form method ="post">
+    {% csrf_token %}
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Email address</label>
     <input type="email" class="form-control" name="username" placeholder="jhon@email.com" required>

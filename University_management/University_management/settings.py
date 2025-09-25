@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts',
     'rest_framework',
-    'rest_framework_simplejwt',
+    
 
 ]
 
@@ -134,4 +134,4 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     )
 }
-AUTH_USER_MODEL = "accounts.User"
+AUTH_USER_MODEL = 'accounts.User'

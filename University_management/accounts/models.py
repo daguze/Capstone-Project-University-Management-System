@@ -1,8 +1,9 @@
+from email.headerregistry import Group
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, Permission
 
 # Create your models here.
-class user(AbstractUser):
+class User(AbstractUser):
     Full_name = models.CharField(max_length=100)
     Entry_date = models.DateField(auto_now_add=True)
 
@@ -11,7 +12,7 @@ class user(AbstractUser):
     
 
 class Staff_user(models.Model):
-    user = models.OneToOneField(user, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     department = models.CharField(max_length=100)
 
     def __str__(self):
@@ -19,7 +20,7 @@ class Staff_user(models.Model):
 
 
 class Student_user(models.Model):
-    user = models.OneToOneField(user, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     department = models.CharField(max_length=100)
     date_joined = models.DateField(auto_now_add=True)
 

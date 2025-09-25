@@ -5,22 +5,24 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      
-      
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'home' %}">logout</a>
-        </li>
-      </ul>
-
-
-
       <ul class="navbar-nav ms-auto">
+        {% if accounts_User.is_authenticated %}
+          
+          <li class="nav-item">
+          <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+        </li>
+      {% else %}
+        
+
         <li class="nav-item">
           <a class="nav-link" href="{% url 'login' %}">Login</a>
         </li>
-      </ul>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'home' %}">Home</a>
+        </li>
       
+      {% endif %}
+      </ul>
     </div>
   </div>
 </nav>
