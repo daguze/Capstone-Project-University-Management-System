@@ -11,13 +11,19 @@ def home(request):
 
 def login_user(request):
     if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        user_check = authenticate(request, username=username, password=password)
+        Username = request.POST.get('Username')
+        Password = request.POST.get('Password')
+        user_check = authenticate(request, username=Username, password=Password)
         if user_check is not None:
             login(request, user_check)
-            messages.success(request, "You have successfully logged in.")
-            return redirect('home')
+            if getattr(user_check, 'user_type', None) == 'staff':
+                messages.success(request, "You have successfully logged in.")
+                
+            elif getattr(user_check, 'user_type', None) == 'student':
+                messages.success(request, "You have successfully logged in.")
+                
+            else:
+                messages.success(request, "You have successfully logged in.")        
         else:
             messages.error(request, "Invalid username or password.")
             return redirect('login')
@@ -25,6 +31,7 @@ def login_user(request):
 
 
 def logout_user(request):
+    logout(request)
     messages.success(request, "You have been logged out.")
     return redirect('home')
   

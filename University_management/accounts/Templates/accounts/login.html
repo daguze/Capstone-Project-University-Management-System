@@ -1,19 +1,18 @@
 {% extends 'accounts/base.html' %}
 {% block content %}
 
-<h2>login</h2>
+<h2>Login</h2>
     
-<form method ="post">
+<form method="post">
     {% csrf_token %}
   <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Email address</label>
-    <input type="text" class="form-control" name="username" placeholder="jhon@email.com" required>
-    
+    <label for="id_username">Username</label>
+    <input id="id_username" type="text" class="form-control" name="username" placeholder="Username" required>
   </div>
+
   <div class="mb-3">
-  </br>
-    <label for="exampleInputPassword1" class="form-label">Password</label>
-    <input type="password" class="form-control" name="password" placeholder="********" required>
+    <label for="id_password">Password</label>
+    <input id="id_password" type="password" class="form-control" name="password" placeholder="********" required>
   </div>
 
   <button type="submit" class="btn btn-primary" formaction="{% url 'login' %}">Submit</button>
