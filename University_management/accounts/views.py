@@ -7,11 +7,37 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 
 def home(request):
-    return render(request, 'accounts/home.html')
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user_check = authenticate(request, username=username, password=password)
+        if user_check is not None:
+            login(request, user_check)
+            messages.success(request, "You have successfully logged in.")
+            return render(request, 'accounts/home.html')
+        else:
+            messages.error(request, "Invalid username or password.")
+            return render(request, 'accounts/login.html')
+    else:
+        return render(request, 'accounts/home.html')
 
 def login_user(request):
-    return render(request, 'accounts/login.html')
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user_check = authenticate(request, username=username, password=password)
+        if user_check is not None:
+            login(request, user_check)
+            messages.success(request, "You have successfully logged in.")
+            return render(request, 'accounts/home.html')
+        else:
+            messages.error(request, "Invalid username or password.")
+            return render(request, 'accounts/login.html')
+    else:
+        return render(request, 'accounts/login.html')
+
 
 def logout_user(request):
     messages.success(request, "You have been logged out.")
     return render(request, 'accounts/login.html')
+  
