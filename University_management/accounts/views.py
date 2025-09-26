@@ -22,13 +22,13 @@ def login_user(request):
             # Check user type and redirect accordingly
             if user.user_type == 'admin':
                 messages.success(request, f"Hello Admin {Username}")
-                return redirect('admin_dashboard')
+                return redirect('home')
             elif user.user_type == 'staff':
                 messages.success(request, f"Hello staff member {Username}")
-                return redirect('staff_dashboard')
+                return redirect('home')
             elif user.user_type == 'student':
                 messages.success(request, f"Hello student {Username}")
-                return redirect('student_dashboard')
+                return redirect('home')
             else:
                 messages.error(request, "Unknown user type.")
                 return redirect('login')
