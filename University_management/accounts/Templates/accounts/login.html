@@ -23,15 +23,35 @@
 
   {% else %}
     <h3>Logged in as {{ user.username }}</h3>
+    </br>
+    </br>
+    
+    
 
     {% if user.user_type == 'admin' %}
       <h4>All Users guests</h4>
-      <ul>
-        {% for u in users %}
-          {{ u.id }} {{ u.fullname }} {{ u.username }} {{ u.email }}
-        {% endfor %}
-      </ul>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">id</th>
+            <th scope="col">Full name</th>
+            <th scope="col">Username</th>
+            <th scope="col">Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+          {% for u in users %}
+            <tr>
+              <td>{{ u.id }}</td>
+              <td>{{ u.fullname }}</td>
+              <td>{{ u.username }}</td>
+              <td>{{ u.email }}</td>
+            </tr>
+          {% endfor %}
 
+        </tbody>
+      </table>
       <h4>All Staff</h4>
       <ul>
         {% for s in staffs %}
