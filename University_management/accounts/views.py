@@ -1,6 +1,6 @@
 from rest_framework import permissions, generics
 from rest_framework.response import Response
-from.models import Staff_user, Student_user
+from.models import Staff_user, Student_user, User
 from .serializers import StaffUserSerializer, StudentUserSerializer
 from django.shortcuts import render, redirect
 from django.contrib import messages
@@ -9,12 +9,14 @@ from django.contrib.auth import authenticate, login, logout
 def home(request):
     return render(request, 'accounts/home.html')
 
-from .models import Staff_user, Student_user, User
+
 
 
 def login_user(request):
 
-    record_data = Student_user.objects.all()
+    student_record_data = Student_user.objects.all()
+    staff_record_data = Staff_user.objects.all()
+    user_record_data = User.objects.all()
     if request.method == 'POST':
         Username = request.POST.get('username')
         Password = request.POST.get('password')
@@ -27,17 +29,22 @@ def login_user(request):
                 return redirect('login')
             elif user.user_type == 'staff':
                 messages.success(request, f"Hello staff member {Username}")
-                return redirect('home')
+                return redirect('login')
             elif user.user_type == 'student':
                 messages.success(request, f"Hello student {Username}")
-                return redirect('home')
+                return redirect('login')
             else:
                 messages.error(request, "Unknown user type.")
                 return redirect('login')
         else:
             messages.error(request, "Invalid username or password.")
             return redirect('login')
-    return render(request, 'accounts/login.html', {'records':record_data})
+    context = {
+        'students': student_record_data,
+        'staffs': staff_record_data,
+        'users': user_record_data
+    }
+    return render(request, 'accounts/login.html', context)
   
 
 def logout_user(request):

@@ -11,7 +11,7 @@ class UserAdmin(BaseUserAdmin):
         (None, {'fields': ('user_type', 'full_name')}),
         )
     add_fieldsets = BaseUserAdmin.add_fieldsets + (
-        (None, {'fields': ('user_type', 'full_name')}),
+        (None, {'fields': ('user_type', 'full_name', 'email')}),
         )
 # Register your models here.
 

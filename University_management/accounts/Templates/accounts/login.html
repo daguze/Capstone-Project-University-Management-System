@@ -1,8 +1,9 @@
 {% extends 'accounts/base.html' %}
 {% block content %}
 
-  <h2>Login</h2>
-  {% if not user.is_authenticated %}   
+  
+  {% if not user.is_authenticated %}
+    <h2>Login</h2>   
     <form method="post">
         {% csrf_token %}
       <div class="mb-3">
@@ -18,18 +19,62 @@
       <button type="submit" class="btn btn-primary" formaction="{% url 'login' %}">Submit</button>
     </form>
 
+  
+
   {% else %}
-    {% if records %}
-      <h2>Data</h2>
-        {% for li in records %}
-          {{li.username}}
-          {{li.fullname}}
-          {{li.department}}
-          {{li.date_joined}}
-          {{li.email}}
+    <h3>Logged in as {{ user.username }}</h3>
+
+    {% if user.user_type == 'admin' %}
+      <h4>All Users guests</h4>
+      <ul>
+        {% for u in users %}
+          {{ u.id }} {{ u.fullname }} {{ u.username }} {{ u.email }}
+        {% endfor %}
+      </ul>
+
+      <h4>All Staff</h4>
+      <ul>
+        {% for s in staffs %}
+          {{ s.user.fullname }} {{ s.department }}
+        {% endfor %}
+      </ul>
+
+      <h4>All Students</h4>
+      <ul>
+        {% for s in students %}
+          <li>{{ s.user.fullname }} {{ s.department }} {{ s.date_joined }}</li>
+        {% endfor %}
+      </ul>
+
+    {% elif user.user_type == 'staff' %}
+      <h4>Your staff record</h4>
+      {% for s in staffs %}
+        {% if s.user.id == user.id %}
+          <p>{{ s.user.fullname }} {{ s.user.username }} {{ s.department }}</p>
+        {% endif %}
       {% endfor %}
-    {% else %}
-      <p>No records at the moment</p>
+
+      <h4>Students in your department</h4>
+      <ul>
+        {% for st in students %}
+          {% if st.department == user.staff_user.department %}
+            <li>{{ st.user.fullname }}</li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+
+    {% elif user.user_type == 'student' %}
+      <h4>Your student record</h4>
+      {% for st in students %}
+        {% if st.user.id == user.id %}
+          <p>{{ st.user.fullname }} — {{ st.department }}</p>
+        {% endif %}
+      {% endfor %}
+
     {% endif %}
+
+  
+
   {% endif %}
+
 {% endblock %}
