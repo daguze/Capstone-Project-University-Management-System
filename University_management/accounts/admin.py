@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import User
+from .models import User, Staff_user, Student_user
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
 @admin.register(User)
@@ -14,3 +14,8 @@ class UserAdmin(BaseUserAdmin):
         (None, {'fields': ('user_type', 'full_name')}),
         )
 # Register your models here.
+
+
+
+admin.site.register(Staff_user)
+admin.site.register(Student_user)

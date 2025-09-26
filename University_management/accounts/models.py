@@ -15,7 +15,7 @@ class User(AbstractUser):
     
     
     def __str__(self):
-        return self.username
+        return (self.username)
     
 
 class Staff_user(models.Model):
@@ -24,7 +24,7 @@ class Staff_user(models.Model):
     date_joined = models.DateField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.user.get.full_name} is in {self.department}"
+        return (f"{self.user.full_name} is in {self.department}")
 
 
 class Student_user(models.Model):
@@ -33,4 +33,4 @@ class Student_user(models.Model):
     
 
     def __str__(self):
-        return f"{self.user.get.full_name} is a student in {self.department}"
+        return (f"{self.user.full_name} is a student in {self.department}")
