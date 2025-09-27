@@ -138,8 +138,9 @@
           {% for st in students %}
             {% if st.user.id == user.id %}
               <td>{{ st.user.full_name }}</td>
+              <td>{{ st.user.email }}</td>
               <td>{{ st.department }}
-              <td>{{ st.registration_Date}}</td>
+              <td>{{ st.user.registration_Date}}</td>
             {% endif %}
           {% endfor %}
         </tbody>
