@@ -9,7 +9,7 @@ class User(AbstractUser):
         ('staff', 'Staff'), 
         ('student', 'Student'),
     ) 
-    user_type = models.CharField(max_length=100, choices=USER_TYPES)
+    user_type = models.CharField(max_length=50, choices=USER_TYPES)
     full_name = models.CharField(max_length=100, null=True)
     registration_Date = models.DateField(auto_now_add=True)
     
@@ -30,6 +30,7 @@ class Staff_user(models.Model):
 class Student_user(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     department = models.CharField(max_length=100)
+    date_joined = models.DateField(auto_now_add=True)
     
 
     def __str__(self):

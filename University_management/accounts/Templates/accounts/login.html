@@ -30,13 +30,14 @@
 
     {% if user.user_type == 'admin' %}
       <h4>All Users guests</h4>
-      <table class="table">
-        <thead>
+      <table class="table table-striped">
+        <thead class = "table-dark">
           <tr>
             <th scope="col">id</th>
             <th scope="col">Full name</th>
             <th scope="col">Username</th>
             <th scope="col">Email</th>
+            <th scope="col">registraion date</th>
           </tr>
         </thead>
         <tbody>
@@ -44,33 +45,60 @@
           {% for u in users %}
             <tr>
               <td>{{ u.id }}</td>
-              <td>{{ u.fullname }}</td>
+              <td>{{ u.full_name }}</td>
               <td>{{ u.username }}</td>
               <td>{{ u.email }}</td>
+              <td>{{ u.registration_Date }}</td>
             </tr>
           {% endfor %}
 
         </tbody>
       </table>
       <h4>All Staff</h4>
-      <ul>
-        {% for s in staffs %}
-          {{ s.user.fullname }} {{ s.department }}
-        {% endfor %}
-      </ul>
+      <table class="table table-striped">
+        <thead class = "table-dark">
+          <tr>
+            <th scope="col">Full name</th>
+            <th scope="col">Email</th>
+            <th scope="col">department</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+          {% for s in staffs %}
+            <td>{{ s.user.full_name }}</td>
+            <td>{{ s.user.email }}</td>
+            <td>{{ s.department }}</td>
+          {% endfor %}
+        </tbody>
+      </table> 
+      
 
       <h4>All Students</h4>
-      <ul>
-        {% for s in students %}
-          <li>{{ s.user.fullname }} {{ s.department }} {{ s.date_joined }}</li>
-        {% endfor %}
-      </ul>
+      <table class="table table-striped">
+        <thead class = "table-dark">
+          <tr>
+            <th scope="col">Full name</th>
+            <th scope="col">Email</th>
+            <th scope="col">registration_Date</th>
+            <th scope="col">Department</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for s in students %}
+              <td>{{ s.user.full_name }}</td>
+              <td>{{ s.user.email }}</td>
+              <td>{{ s.user.registration_Date }}</td>
+              <td>{{ s.department }}</td>
+            {% endfor %}
+          </tbody>
+        </table>
 
     {% elif user.user_type == 'staff' %}
       <h4>Your staff record</h4>
       {% for s in staffs %}
         {% if s.user.id == user.id %}
-          <p>{{ s.user.fullname }} {{ s.user.username }} {{ s.department }}</p>
+          <p>{{ s.user.full_name }} {{ s.user.username }} {{ s.department }}</p>
         {% endif %}
       {% endfor %}
 
@@ -78,7 +106,7 @@
       <ul>
         {% for st in students %}
           {% if st.department == user.staff_user.department %}
-            <li>{{ st.user.fullname }}</li>
+            <li>{{ st.user.full_name }}</li>
           {% endif %}
         {% endfor %}
       </ul>
@@ -87,7 +115,7 @@
       <h4>Your student record</h4>
       {% for st in students %}
         {% if st.user.id == user.id %}
-          <p>{{ st.user.fullname }} — {{ st.department }}</p>
+          <p>{{ st.user.full_name }} — {{ st.department }}</p>
         {% endif %}
       {% endfor %}
 

@@ -5,7 +5,8 @@ from .serializers import StaffUserSerializer, StudentUserSerializer
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-
+from .permissions import IsAdmin, IsStaff, IsStaffOrAdmin,IsStudent
+from rest_framework.decorators import api_view, permission_classes
 def home(request):
     return render(request, 'accounts/home.html')
 
