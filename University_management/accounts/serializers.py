@@ -10,9 +10,9 @@ class UserSerializer(serializers.ModelSerializer):
 class StaffUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = Staff_user
-        fields = ['user', 'department', 'date_joined']
+        fields = '__all__'
 
 class StudentUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = Student_user
-        fields = ['user', 'department', 'date_joined']
+        fields = '__all__'

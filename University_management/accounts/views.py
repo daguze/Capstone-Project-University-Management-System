@@ -7,6 +7,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from .permissions import IsAdmin, IsStaff, IsStaffOrAdmin,IsStudent
 from rest_framework.decorators import api_view, permission_classes
+from rest_framework.generics import ListAPIView
 def home(request):
     return render(request, 'accounts/home.html')
 
@@ -53,3 +54,19 @@ def logout_user(request):
     messages.success(request, "You have been logged out.")
     return redirect('home')
   
+
+
+class StudentListView(generics.ListAPIView):
+    queryset = Student_user.objects.select_related("user").all()
+    serializer_class = StudentUserSerializer
+    permission_classes = [IsStaffOrAdmin]
+
+
+class StaffListView(generics.ListAPIView):
+    queryset = Staff_user.objects.select_related("user").all()
+    serializer_class = StaffUserSerializer
+    permission_classes = [IsStaffOrAdmin]
+
+class StudetProfileView(generics.ListAPIView):
+    serializer_class = StudentUserSerializer
+    permission_classes = [IsStaffOrAdmin]
