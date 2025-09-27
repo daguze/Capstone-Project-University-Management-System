@@ -56,6 +56,16 @@ def logout_user(request):
   
 
 
+
+@api_view(["GET"])
+@permission_classes([permissions.IsAuthenticated])
+def who_is_logged(request):
+    return Response({
+        "id": request.user.id,
+        "username": request.user.username,
+    })
+
+
 class StudentListView(generics.ListAPIView):
     queryset = Student_user.objects.select_related("user").all()
     serializer_class = StudentUserSerializer
@@ -67,6 +77,11 @@ class StaffListView(generics.ListAPIView):
     serializer_class = StaffUserSerializer
     permission_classes = [IsStaffOrAdmin]
 
-class StudetProfileView(generics.ListAPIView):
+class StudentProfileView(generics.ListAPIView):
     serializer_class = StudentUserSerializer
     permission_classes = [IsStaffOrAdmin]
+
+class StudentDetailView(generics.RetrieveAPIView):
+    serializer_class = StudentUserSerializer
+    permission_classes = [IsStaffOrAdmin]
+    lookup_field = "id"
