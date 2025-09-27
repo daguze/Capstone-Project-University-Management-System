@@ -103,22 +103,47 @@
       {% endfor %}
 
       <h4>Students in your department</h4>
-      <ul>
-        {% for st in students %}
-          {% if st.department == user.staff_user.department %}
-            <li>{{ st.user.full_name }}</li>
-          {% endif %}
-        {% endfor %}
-      </ul>
-
+      <table class="table table-striped">
+        <thead class = "table-dark">
+          <tr>
+            <th scope="col">Full name</th>
+            <th scope="col">Email</th>
+            <th scope="col">registration_Date</th>
+            <th scope="col">Department</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for st in students %}
+            {% if st.department == user.staff_user.department %}
+              <td> {{st.user.full_name }}</td>
+              <td> {{st.user.email }}</td>
+              <td> {{st.user.registration_Date }}</td>
+              <td> {{st.department }}</td>
+            {% endif %}
+          {% endfor %}
+        </tbody>
+      </table>
     {% elif user.user_type == 'student' %}
       <h4>Your student record</h4>
-      {% for st in students %}
-        {% if st.user.id == user.id %}
-          <p>{{ st.user.full_name }} — {{ st.department }}</p>
-        {% endif %}
-      {% endfor %}
-
+      <table class="table table-striped">
+        <thead class = "table-dark">
+          <tr>
+            <th scope="col">Full name</th>
+            <th scope="col">Email</th>
+            <th scope="col">registration_Date</th>
+            <th scope="col">Department</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for st in students %}
+            {% if st.user.id == user.id %}
+              <td>{{ st.user.full_name }}</td>
+              <td>{{ st.department }}
+              <td>{{ st.registration_Date}}</td>
+            {% endif %}
+          {% endfor %}
+        </tbody>
+      </table>
     {% endif %}
 
   

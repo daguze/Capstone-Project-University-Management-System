@@ -30,7 +30,7 @@ class Staff_user(models.Model):
 class Student_user(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     department = models.CharField(max_length=100)
-    date_joined = models.DateField(auto_now_add=True)
+    date_joined = models.DateField(auto_now_add=True,)
     
 
     def __str__(self):
