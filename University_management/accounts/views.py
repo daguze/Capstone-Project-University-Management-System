@@ -82,6 +82,13 @@ class StudentProfileView(generics.ListAPIView):
     permission_classes = [IsStaffOrAdmin]
 
 class StudentDetailView(generics.RetrieveAPIView):
+    queryset = Student_user.objects.select_related("user").all()
     serializer_class = StudentUserSerializer
     permission_classes = [IsStaffOrAdmin]
-    lookup_field = "id"
+    lookup_field = "user_id"
+
+class StaffDetailView(generics.RetrieveAPIView):
+    queryset = Staff_user.objects.select_related("user").all()
+    serializer_class = StaffUserSerializer
+    permission_classes = [IsStaffOrAdmin]
+    lookup_field = "user_id"
