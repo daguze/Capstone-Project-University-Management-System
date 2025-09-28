@@ -10,7 +10,7 @@ from accounts.permissions import IsAdmin, IsStaff, IsStaffOrAdmin,IsStudent
 #this is for the courses
 class CourseListView(generics.ListAPIView):
     queryset = Course.objects.all()
-    serializer = CourseSerializers
+    serializer_class = CourseSerializers
     permission_classes = [permissions.AllowAny]
     filter_backends = [filters.SearchFilter, filters.OrderingFilter]
     search_fields = ['code','title', 'department', 'instructor__user__full_name']
@@ -18,18 +18,18 @@ class CourseListView(generics.ListAPIView):
     ordering = ['code']
 
 class CourseCreateView(generics.CreateAPIView):
-    serializer = CourseSerializers
+    serializer_class = CourseSerializers
     queryset = Course.objects.all()
     permission_classes = [IsStaffOrAdmin]
 
 class CourseUpdateView(generics.UpdateAPIView):
     queryset = Course.objects.all()
-    serializer = CourseSerializers
+    serializer_class = CourseSerializers
     permission_classes = [IsStaffOrAdmin]
 
 class CourseDeleteView(generics.DestroyAPIView):
     queryset = Course.objects.all()
-    serializer = CourseSerializers
+    serializer_class = CourseSerializers
     permission_classes = [IsStaffOrAdmin]
 
 
@@ -38,6 +38,8 @@ class CourseDeleteView(generics.DestroyAPIView):
 #this isfor the grade
 
 class GradeListView(generics.ListAPIView):
+    serializer_class = GradeSerializers
+    permission_classes = [permissions.AllowAny]
     def a_query(self):
         user = self.request.user
         q_s = Grade.objects.select_related('student__user', 'course__instructor__user')

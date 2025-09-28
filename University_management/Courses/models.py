@@ -4,6 +4,7 @@ from accounts.models import Student_user, Staff_user
 
 
 class Course(models.Model):
+    code = models.CharField(max_length=20, unique=True)
     title = models.CharField(max_length=100)
     course = models.CharField(max_length=50, unique=True)
     department = models.CharField(max_length=100, blank=True)
