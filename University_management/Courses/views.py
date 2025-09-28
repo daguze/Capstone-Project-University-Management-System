@@ -50,7 +50,7 @@ class gradelistview(generics.ListAPIView):
 class GradeDetailView(generics.RetrieveAPIView):
     queryset = Grade.objects.select_related('student__user', 'course').all()
     serializer_class = GradeSerializer
-    permission_classes = [permissions.IsAuthenticated, IsGradeOwnerOrStaff]
+    permission_classes = [permissions.IsAuthenticated, IsStudent,IsStaff]
 
 
 class GradeCreateView(generics.CreateAPIView):
