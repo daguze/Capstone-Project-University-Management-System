@@ -3,7 +3,7 @@ from accounts.models import Student_user, Staff_user
 # Create your models here.
 
 
-class courses(models.Model):
+class Course(models.Model):
     title = models.CharField(max_length=100)
     course = models.CharField(max_length=50, unique=True)
     department = models.CharField(max_length=100, blank=True)
@@ -13,9 +13,9 @@ class courses(models.Model):
         return f"{self.code} - {self.title}"
     
 
-class grade(models.Model):
+class Grade(models.Model):
     student = models.ForeignKey(Student_user, on_delete=models.CASCADE, related_name='grades')
-    course = models.ForeignKey(courses, on_delete=models.CASCADE, related_name='grades')
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='grades')
     score = models.PositiveIntegerField()
 
     def __str__(self):

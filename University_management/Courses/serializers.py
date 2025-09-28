@@ -1,10 +1,10 @@
 from rest_framework import serializers
-from .models import courses, grade
+from .models import Course, Grade
 
 
-class CourseSerializers(serializers.modelserializer):
+class CourseSerializers(serializers.ModelSerializer):
     class Meta:
-        model = courses
+        model = Course
         fields = '__all__'
     
     def get_instructor_name(self, obj):
@@ -14,9 +14,9 @@ class CourseSerializers(serializers.modelserializer):
 
 
 
-class GradeSerializer(serializers.modelserializer):
+class GradeSerializers(serializers.ModelSerializer):
     class Meta:
-        model = grade
+        model = Grade
         fields = "__all__"
 
     def get_student_name(self, obj):
