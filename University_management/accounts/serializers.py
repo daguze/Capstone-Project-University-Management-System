@@ -1,5 +1,4 @@
 from rest_framework import serializers
-
 from .models import Staff_user, Student_user, User
 
 class UserSerializer(serializers.ModelSerializer):
