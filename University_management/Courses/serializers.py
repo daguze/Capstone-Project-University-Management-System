@@ -2,7 +2,7 @@ from rest_framework import serializers
 from .models import courses, grade
 
 
-class coursesuserserializers(serializers.modelserializer):
+class CourseSerializers(serializers.modelserializer):
     class Meta:
         model = courses
         fields = '__all__'
@@ -14,7 +14,7 @@ class coursesuserserializers(serializers.modelserializer):
 
 
 
-class gradeuserserializer(serializers.modelserializer):
+class GradeSerializer(serializers.modelserializer):
     class Meta:
         model = grade
         fields = "__all__"
