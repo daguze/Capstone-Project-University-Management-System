@@ -4,6 +4,7 @@ from .views import home, login_user, logout_user, StudentListView, who_is_logged
 
 urlpatterns = [
     path('',home, name='home'),
+    path('home/',home, name='home'),
     path('login/',login_user, name='login'),
     path('logout/',logout_user, name='logout'),
     path('api/whoami/', who_is_logged, name='whoami'),
