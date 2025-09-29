@@ -6,8 +6,11 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from .permissions import IsAdmin, IsStaff, IsStaffOrAdmin,IsStudent
-from rest_framework.decorators import api_view, permission_classes
+from rest_framework.decorators import api_view, permission_classes, login_required, user_passes_test
 from rest_framework.generics import ListAPIView
+from Courses.models import Grade
+from django.forms import modelform_factory
+
 def home(request):
     return render(request, 'accounts/home.html')
 
@@ -92,3 +95,73 @@ class StaffDetailView(generics.RetrieveAPIView):
     serializer_class = StaffUserSerializer
     permission_classes = [IsStaffOrAdmin]
     lookup_field = "user_id"
+
+
+
+def students_list_view(request):
+    if not request.user.is_authernticated:
+        return redirect('login')
+    if request.user.user_type not in ("admin", "staff"):
+        messages.error(request, "unauthorised access")
+        return redirect('home')
+
+    students = (
+        Student_user.objects
+        .select_related("user")
+        .order_by("user__full_name")
+    )
+    return render(request, "accounts/students_list.html", {"students": students})
+def student_detail_view(request, user_id: int):
+    if not request.user.is_authenticated:
+        return redirect("login")
+    if request.user.user_type not in ("admin", "staff"):
+        messages.error(request, "You are not authorized to view this page.")
+        return redirect("home")
+
+ 
+    grades = (
+        Grade.objects
+        .select_related("course", "student__user")
+        .filter(student=Student_user)
+        .order_by("user__full_name")
+    )
+
+
+    context = {
+        "student": Student_user,
+        "grades": grades,
+    }
+    return render(request, "accounts/student_detail.html", context)
+
+
+def student_edit_view(request, user_id: int):
+    if not request.user.is_authenticated:
+        return redirect("login")
+    if request.user.user_type not in ("admin", "staff"):   # or == "admin" if only admin edits
+        messages.error(request, "You are not authorized to edit student data.")
+        return redirect("home")
+
+
+    # create form classes on the fly
+    UserForm = modelform_factory(User, fields=["username", "email", "full_name", "user_type", "is_active"])
+    StudentForm = modelform_factory(Student_user, fields=["department"])
+
+    if request.method == "POST":
+        u_form = UserForm(request.POST, instance=User)
+        s_form = StudentForm(request.POST, instance=Student_user)
+        if u_form.is_valid() and s_form.is_valid():
+            u_form.save()
+            s_form.save()
+            messages.success(request, "Student profile updated successfully.")
+            return redirect("student-detail-page", user_id=user_id)
+        else:
+            messages.error(request, "Please fix the errors below.")
+    else:
+        u_form = UserForm(instance=User)
+        s_form = StudentForm(instance=Student_user)
+
+    return render(request, "accounts/student_edit.html", {
+        "student": Student_user,
+        "u_form": u_form,
+        "s_form": s_form,
+    })
