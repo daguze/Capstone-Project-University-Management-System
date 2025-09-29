@@ -6,7 +6,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from .permissions import IsAdmin, IsStaff, IsStaffOrAdmin,IsStudent
-from rest_framework.decorators import api_view, permission_classes, login_required, user_passes_test
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.generics import ListAPIView
 from Courses.models import Grade
 from django.forms import modelform_factory
@@ -143,7 +143,7 @@ def student_edit_view(request, user_id: int):
 
 
     # create form classes on the fly
-    UserForm = modelform_factory(User, fields=["username", "email", "full_name", "user_type", "is_active"])
+    UserForm = modelform_factory(User, fields=["username", "email", "full_name", "user_type"])
     StudentForm = modelform_factory(Student_user, fields=["department"])
 
     if request.method == "POST":

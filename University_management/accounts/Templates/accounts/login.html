@@ -45,7 +45,7 @@
           {% for u in users %}
             <tr>
               <td>{{ u.id }}</td>
-              <td>{{ u.full_name }}</td>
+              <td><a href="{% url 'student-detail-page' user_id=u.id %}">{{ u.full_name }}</a></td>
               <td>{{ u.username }}</td>
               <td>{{ u.email }}</td>
               <td>{{ u.registration_Date }}</td>

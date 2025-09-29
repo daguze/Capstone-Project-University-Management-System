@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+<a href="{% url 'students-list-page' %}">Back to list</a>
+
+<h1>{{ student.user.full_name }}</h1>
+<p>Username: {{ student.user.username }}</p>
+<p>Email: {{ student.user.email }}</p>
+<p>User type:{{ student.user.user_type }}</p>
+<p>Active:{{ student.user.is_active }}</p>
+<p>Department: {{ student.department }}</p>
+<p>Joined:{{ student.date_joined }}</p>
+<p><a href="{% url 'student-edit-page' %}">Edit</a></p>
+
+<h2>Grades</h2>
+{% if grades %}
+  <table class="table table table-striped">
+    <thead>
+      <tr>
+        <th>Course code</th>
+        <th>Course title</th>
+        <th>Score</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for g in grades %}
+      <tr>
+        <td>{{ g.course.code }}</td>
+        <td>{{ g.course.title }}</td>
+        <td>{{ g.score }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+  <p>No grades yet.</p>
+{% endif %}
+{% endblock %}
