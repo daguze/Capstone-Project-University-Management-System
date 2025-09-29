@@ -99,7 +99,7 @@ class StaffDetailView(generics.RetrieveAPIView):
 
 
 def students_list_view(request):
-    if not request.user.is_authernticated:
+    if not request.user.is_authenticated:
         return redirect('login')
     if request.user.user_type not in ("admin", "staff"):
         messages.error(request, "unauthorised access")
@@ -118,17 +118,21 @@ def student_detail_view(request, user_id: int):
         messages.error(request, "You are not authorized to view this page.")
         return redirect("home")
 
- 
+    student =(
+        Student_user.objects.select_related("user"),
+        user_id==user_id,
+    )
+
     grades = (
         Grade.objects
         .select_related("course", "student__user")
-        .filter(student=Student_user)
-        .order_by("user__full_name")
+        .filter(student=student)
+        .order_by("course_code")
     )
 
 
     context = {
-        "student": Student_user,
+        "student": student,
         "grades": grades,
     }
     return render(request, "accounts/student_detail.html", context)
@@ -142,13 +146,18 @@ def student_edit_view(request, user_id: int):
         return redirect("home")
 
 
-    # create form classes on the fly
+    student =(
+        Student_user.objects.select_related("user"),
+        user_id==user_id
+    )
+    user = student.user
+
     UserForm = modelform_factory(User, fields=["username", "email", "full_name", "user_type"])
     StudentForm = modelform_factory(Student_user, fields=["department"])
 
     if request.method == "POST":
         u_form = UserForm(request.POST, instance=User)
-        s_form = StudentForm(request.POST, instance=Student_user)
+        s_form = StudentForm(request.POST, instance=student)
         if u_form.is_valid() and s_form.is_valid():
             u_form.save()
             s_form.save()
@@ -157,11 +166,11 @@ def student_edit_view(request, user_id: int):
         else:
             messages.error(request, "Please fix the errors below.")
     else:
-        u_form = UserForm(instance=User)
-        s_form = StudentForm(instance=Student_user)
+        u_form = UserForm(instance=user)
+        s_form = StudentForm(instance=student)
 
     return render(request, "accounts/student_edit.html", {
-        "student": Student_user,
+        "student": student,
         "u_form": u_form,
         "s_form": s_form,
     })
