@@ -3,13 +3,16 @@
 <a href="{% url 'students-list-page' %}">Back to list</a>
 
 <h1>{{ student.user.full_name }}</h1>
-<p>Username: {{ student.user.username }}</p>
-<p>Email: {{ student.user.email }}</p>
-<p>User type:{{ student.user.user_type }}</p>
-<p>Active:{{ student.user.is_active }}</p>
-<p>Department: {{ student.department }}</p>
-<p>Joined:{{ student.date_joined }}</p>
-<p><a href="{% url 'student-edit-page' %}">Edit</a></p>
+
+    <p><strong>Username</strong>: {{ student.user.username }}</p>
+    <p><strong>Email</strong>: {{ student.user.email }}</p>
+    <p><strong>User type</strong>:{{ student.user.user_type }}</p>
+    <p><strong>Active</strong>:{{ student.user.is_active }}</p>
+    <p><strong>Department</strong>: {{ student.department }}</p>
+    <p><strong>Joined</strong>:{{ student.date_joined }}</p>
+    
+
+<p><a href="{% url 'student-edit-page' user_id=student.user_id %}">Edit</a></p>
 
 <h2>Grades</h2>
 {% if grades %}

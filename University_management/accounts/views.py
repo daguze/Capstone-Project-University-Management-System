@@ -157,7 +157,7 @@ def student_edit_view(request, user_id: int):
 
     if request.method == "POST":
         u_form = UserForm(request.POST, instance=User)
-        s_form = StudentForm(request.POST, instance=student)
+        s_form = StudentForm(request.POST, request.FILES, instance=student)
         if u_form.is_valid() and s_form.is_valid():
             u_form.save()
             s_form.save()

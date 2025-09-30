@@ -1,6 +1,7 @@
 
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.core.exceptions import ValidationError
 
 # Create your models here.
 class User(AbstractUser):
@@ -12,6 +13,10 @@ class User(AbstractUser):
     user_type = models.CharField(max_length=50, choices=USER_TYPES)
     full_name = models.CharField(max_length=100, null=True)
     registration_Date = models.DateField(auto_now_add=True)
+
+    def full_clean(self, exclude=None, validate_unique=True, validate_constraints=True):
+        super().full_clean(exclude=exclude, validate_unique=validate_unique, validate_constraints=validate_constraints,)
+
     
     
     def __str__(self):
@@ -31,6 +36,8 @@ class Student_user(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     department = models.CharField(max_length=100)
     date_joined = models.DateField(auto_now_add=True,)
+
+    #
     
 
     def __str__(self):

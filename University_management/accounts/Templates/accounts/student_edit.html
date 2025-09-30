@@ -1,5 +1,4 @@
 {% extends "accounts/base.html" %}
-{% load crispy_forms_tags %} {# if you use crispy; otherwise remove #}
 {% block content %}
 <a href="{% url 'student-detail-page' user_id=student.user.id %}">← Back to detail</a>
 <h1>Edit: {{ student.user.full_name }}</h1>
@@ -10,6 +9,6 @@
     {{ u_form.as_p }}
     <p>Student</p>
     {{ s_form.as_p }}
-  <button href = "{% url 'login' %}">Save</button>
+  <button href = "{% url 'student-detail-page' %}">Save</button>
 </form>
 {% endblock %}
