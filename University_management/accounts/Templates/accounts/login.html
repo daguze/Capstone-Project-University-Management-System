@@ -86,7 +86,7 @@
         </thead>
         <tbody>
             {% for s in students %}
-              <td><a href="{% url 'student-detail-page' user_id=s.user.id %}">{{ s.user.full_name }}</td>
+              <td><a href="{% url 'students-list-page' %}">{{ s.user.full_name }}</td>
               <td>{{ s.user.email }}</td>
               <td>{{ s.user.registration_Date }}</td>
               <td>{{ s.department }}</td>
@@ -115,7 +115,7 @@
         <tbody>
           {% for st in students %}
             {% if st.department == user.staff_user.department %}
-              <td> {{st.user.full_name }}</td>
+              <td><a href="{% url 'students-list-page' %}"> {{st.user.full_name }}</a></td>
               <td> {{st.user.email }}</td>
               <td> {{st.user.registration_Date }}</td>
               <td> {{st.department }}</td>
