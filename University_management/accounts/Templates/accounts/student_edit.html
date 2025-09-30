@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "accounts/base.html" %}
 {% load crispy_forms_tags %} {# if you use crispy; otherwise remove #}
 {% block content %}
 <a href="{% url 'student-detail-page' user_id=student.user.id %}">← Back to detail</a>

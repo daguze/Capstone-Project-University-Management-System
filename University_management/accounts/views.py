@@ -10,7 +10,7 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.generics import ListAPIView
 from Courses.models import Grade
 from django.forms import modelform_factory
-
+from django.shortcuts import get_object_or_404
 def home(request):
     return render(request, 'accounts/home.html')
 
@@ -118,16 +118,16 @@ def student_detail_view(request, user_id: int):
         messages.error(request, "You are not authorized to view this page.")
         return redirect("home")
 
-    student =(
+    student = get_object_or_404(
         Student_user.objects.select_related("user"),
-        user_id==user_id,
+        user_id=user_id,
     )
 
     grades = (
         Grade.objects
         .select_related("course", "student__user")
         .filter(student=student)
-        .order_by("course_code")
+        .order_by("course_id")
     )
 
 
@@ -146,9 +146,9 @@ def student_edit_view(request, user_id: int):
         return redirect("home")
 
 
-    student =(
+    student = get_object_or_404(
         Student_user.objects.select_related("user"),
-        user_id==user_id
+        user_id=user_id
     )
     user = student.user
 
