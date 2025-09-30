@@ -9,6 +9,6 @@
     {{ u_form.as_p }}
     <p>Student</p>
     {{ s_form.as_p }}
-  <button href = "{% url 'student-detail-page' %}">Save</button>
+  <button href = "{% url 'student-detail-page' user_id=student.user.id %}">Save</button>
 </form>
 {% endblock %}
