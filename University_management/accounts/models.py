@@ -14,10 +14,8 @@ class User(AbstractUser):
     full_name = models.CharField(max_length=100, null=True)
     registration_Date = models.DateField(auto_now_add=True)
 
-    def full_clean(self, exclude=None, validate_unique=True, validate_constraints=True):
-        super().full_clean(exclude=exclude, validate_unique=validate_unique, validate_constraints=validate_constraints,)
-
-    
+    def clean(self):
+        super().clean()
     
     def __str__(self):
         return self.username
