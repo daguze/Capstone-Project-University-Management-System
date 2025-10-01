@@ -11,6 +11,7 @@ from rest_framework.generics import ListAPIView
 from Courses.models import Grade
 from django.forms import modelform_factory
 from django.shortcuts import get_object_or_404
+from Courses.models import Grade
 def home(request):
     return render(request, 'accounts/home.html')
 
@@ -22,6 +23,7 @@ def login_user(request):
     student_record_data = Student_user.objects.all()
     staff_record_data = Staff_user.objects.all()
     user_record_data = User.objects.all()
+    grades_qs = Grade.objects.all()
     if request.method == 'POST':
         Username = request.POST.get('username')
         Password = request.POST.get('password')
@@ -47,7 +49,8 @@ def login_user(request):
     context = {
         'students': student_record_data,
         'staffs': staff_record_data,
-        'users': user_record_data
+        'users': user_record_data,
+        'grades': grades_qs,
     }
     return render(request, 'accounts/login.html', context)
   

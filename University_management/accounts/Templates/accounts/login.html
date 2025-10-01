@@ -139,16 +139,38 @@
             {% if st.user.id == user.id %}
               <td>{{ st.user.full_name }}</td>
               <td>{{ st.user.email }}</td>
-              <td>{{ st.department }}
               <td>{{ st.user.registration_Date}}</td>
+              <td>{{ st.department }}
             {% endif %}
           {% endfor %}
         </tbody>
       </table>
+
+      <h2>Grades</h2>
+      {% if grades %}
+        <table class="table table table-striped">
+          <thead>
+            <tr>
+              <th>Course code</th>
+              <th>Course title</th>
+              <th>Score</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for g in grades %}
+              <tr>
+                <td>{{ g.course.code }}</td>
+                <td>{{ g.course.title }}</td>
+                <td>{{ g.score }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      {% else %}
+        <p>No grades yet.</p>
+      {% endif %}
     {% endif %}
-
-  
-
   {% endif %}
+
 
 {% endblock %}

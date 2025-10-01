@@ -16,7 +16,7 @@
 
 <h2>Grades</h2>
 {% if grades %}
-  <table class="table table table-striped">
+  <table class="table table-striped">
     <thead>
       <tr>
         <th>Course code</th>
@@ -26,11 +26,11 @@
     </thead>
     <tbody>
       {% for g in grades %}
-      <tr>
-        <td>{{ g.course.code }}</td>
-        <td>{{ g.course.title }}</td>
-        <td>{{ g.score }}</td>
-      </tr>
+        <tr>
+            <td>{{ g.course.code }}</td>
+            <td>{{ g.course.title }}</td>
+            <td>{{ g.score }}</td>
+        </tr>
       {% endfor %}
     </tbody>
   </table>
