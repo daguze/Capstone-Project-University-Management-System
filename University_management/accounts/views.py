@@ -159,7 +159,7 @@ def student_edit_view(request, user_id: int):
     StudentForm = modelform_factory(Student_user, fields=["department"])
 
     if request.method == "POST":
-        u_form = UserForm(request.POST, instance=User)
+        u_form = UserForm(request.POST, instance=user)
         s_form = StudentForm(request.POST, request.FILES, instance=student)
         if u_form.is_valid() and s_form.is_valid():
             u_form.save()
