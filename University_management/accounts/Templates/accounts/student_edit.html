@@ -1,14 +1,18 @@
 {% extends "accounts/base.html" %}
 {% block content %}
-<a href="{% url 'student-detail-page' user_id=student.user.id %}">← Back to detail</a>
-<h1>Edit: {{ student.user.full_name }}</h1>
-
-<form method="post">
-    {% csrf_token %}
-    <p>User</p>
-    {{ u_form.as_p }}
-    <p>Student</p>
-    {{ s_form.as_p }}
-  <button href = "{% url 'student-detail-page' user_id=student.user.id %}">Save</button>
-</form>
+  <a href="{% url 'student-detail-page' user_id=student.user.id %}">← Back to detail</a>
+  <h1>Edit: {{ student.user.full_name }}</h1>
+  {% if user.user_type == 'admin' %}
+    <form method="post">
+        {% csrf_token %}
+        <p>User</p>
+        {{ u_form.as_p }}
+        <p>Student</p>
+        {{ s_form.as_p }}
+      <button href = "{% url 'student-detail-page' user_id=student.user.id %}">Save</button>
+    </form>
+  {% else %}
+    <p>You do not have permission to edit this student.</p>
+    
+  {% endif %}
 {% endblock %}
