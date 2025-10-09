@@ -1,12 +1,107 @@
 {% extends 'accounts/base.html' %}
 {% block content %}
-    <style>
-        body {
-            background-color: #2a3e51;
-            color: #ffffff;
-        }
-        
-    </style>
-    <h2>Welcome to the Home Page</h2>
-    <p>This is the home page of the D.A University.</p>
+<style>
+    body {
+        background-color: #4e6b87;
+        color: #ffffff;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    .hero {
+        text-align: center;
+        background: url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1400&q=80') no-repeat center center/cover;
+        color: white;
+        padding: 120px 20px;
+    }
+
+    .hero h1 {
+        font-size: 48px;
+        margin-bottom: 10px;
+        text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+    }
+
+    .hero p {
+        font-size: 20px;
+        max-width: 700px;
+        margin: 0 auto;
+        line-height: 1.6;
+        text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+    }
+
+    .section {
+        max-width: 1100px;
+        margin: 60px auto;
+        padding: 0 20px;
+        text-align: center;
+    }
+
+    .section img {
+        width: 100%;
+        max-width: 600px;
+        border-radius: 10px;
+        margin: 30px 0;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .section h2 {
+        font-size: 32px;
+        color: #ffffff;
+        margin-bottom: 15px;
+    }
+
+    .section p {
+        font-size: 18px;
+        line-height: 1.7;
+        color: #ffffff;
+    }
+
+    footer {
+        background-color: #2a3e51;
+        color: white;
+        text-align: center;
+        padding: 20px;
+        margin-top: 60px;
+    }
+</style>
+
+<div class="hero">
+    <h1>Welcome to D.A University</h1>
+    <p>Empowering students through knowledge, innovation, and community engagement. 
+       Here, education goes beyond the classroom — it’s about creating a better tomorrow.</p>
+</div>
+
+<div class="section">
+    <h2>About Our University</h2>
+    <p>
+        D.A University is a hub for bright minds and passionate learners. 
+        Our programs are designed to help students explore their interests, 
+        develop real-world skills, and shape their future careers with confidence.
+    </p>
+    <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1000&q=80" alt="University Campus">
+</div>
+
+<div class="section">
+    <h2>Student Life</h2>
+    <p>
+        Life at D.A University is vibrant and diverse. From student clubs and cultural 
+        festivals to research labs and sports there’s always something happening on campus.
+    </p>
+    <img src="https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=1000&q=80" alt="Students on Campus">
+</div>
+
+<div class="section">
+    <h2>Join Us</h2>
+    <p>
+        Whether you're a student, staff, or faculty member, D.A University welcomes you 
+        to be part of our growing community. Together, we’re shaping the next generation 
+        of thinkers, creators, and leaders.
+    </p>
+    <img src="https://www.freepik.com/free-photo/medium-shot-colleagues-posing-together_13819193.htm#fromView=keyword&page=1&position=0&uuid=a2ec21ea-722d-4a15-b939-4e838cd94055&query=Graduation+group" alt="Graduation Celebration">
+</div>
+
+<footer>
+    <p>&copy; 2025 D.A University | All Rights Reserved</p>
+</footer>
 {% endblock %}
