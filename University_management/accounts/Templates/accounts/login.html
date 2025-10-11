@@ -36,7 +36,7 @@
     
 
     {% if user.user_type == 'admin' %}
-      <h4>All Users guests</h4>
+      <h4>All Users </h4>
       <table class="table table-striped">
         <thead class = "table-dark">
           <tr>
@@ -73,15 +73,17 @@
         <tbody>
           
           {% for s in staffs %}
-            <td>{{ s.user.full_name }}</td>
-            <td>{{ s.user.email }}</td>
-            <td>{{ s.department }}</td>
+            <tr>
+              <td>{{ s.user.full_name }}</td>
+              <td>{{ s.user.email }}</td>
+              <td>{{ s.department }}</td>
+            </tr>
           {% endfor %}
         </tbody>
       </table> 
       
 
-      <h4>All Students</h4>
+      <h4><a href="{% url 'students-list-page' %}">All Students</h4></a>
       <table class="table table-striped">
         <thead class = "table-dark">
           <tr>
@@ -93,10 +95,12 @@
         </thead>
         <tbody>
             {% for s in students %}
-              <td><a href="{% url 'students-list-page' %}">{{ s.user.full_name }}</td>
-              <td>{{ s.user.email }}</td>
-              <td>{{ s.user.registration_Date }}</td>
-              <td>{{ s.department }}</td>
+              <tr>
+                <td>{{ s.user.full_name }}</td>
+                <td>{{ s.user.email }}</td>
+                <td>{{ s.user.registration_Date }}</td>
+                <td>{{ s.department }}</td>
+              </tr>
             {% endfor %}
           </tbody>
         </table>

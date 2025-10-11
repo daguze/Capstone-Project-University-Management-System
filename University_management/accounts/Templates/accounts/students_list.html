@@ -2,6 +2,10 @@
 {% block content %}
 <a href="{% url 'login' %}">Back to login</a>
 <h1>Student</h1>
+<form method="get" class="d-flex mb-3" style="gap: 10px;">
+  <input type="text" name="q" value="{{ query }}" placeholder="Search..." class="form-control" style="max-width: 250px;">
+  <button type="submit" class="btn btn-primary">Search</button>
+</form>
 <table class="table ">
   <thead>
     <tr>
